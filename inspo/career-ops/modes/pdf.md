@@ -5,7 +5,7 @@
 1. Read `cv.md` as the source of truth
 2. Ask the user for the JD if it is not in context (text or URL)
 3. Extract 15-20 keywords from the JD
-4. Detect JD language → CV language (EN default)
+4. Detect JD/application language → CV language. Swedish JD/form → Swedish CV text. English JD/form → English CV text. If mixed, follow the application form language. Default to English only when language is unclear.
 5. Detect company location → paper format:
    - US/Canada → `letter`
    - Rest of the world → `a4`
@@ -91,6 +91,14 @@ Use the template in `cv-template.html`. Replace the `{{...}}` placeholders with 
 | `{{CERTIFICATIONS}}` | Certifications HTML |
 | `{{SECTION_SKILLS}}` | Skills |
 | `{{SKILLS}}` | Skills HTML |
+
+## Language Selection
+
+Candidate-facing CV text must match the employer/application language:
+- Swedish JD or application form → Swedish section headings and Swedish tailored content.
+- English JD or application form → English section headings and English tailored content.
+- Mixed language → follow the application form questions; if no form is visible, follow the JD body language.
+- Internal notes and evaluation analysis may remain English unless the user asks for Swedish.
 
 ## Canva CV Generation (optional)
 

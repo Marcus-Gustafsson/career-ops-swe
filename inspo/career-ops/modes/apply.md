@@ -62,6 +62,7 @@ Classify each question:
 
 For each question, generate the response following:
 
+0. **Language match**: Candidate-facing answers must match the form/JD language. Swedish form or Swedish JD → Swedish answers and cover-letter text. English form or English JD → English. If mixed, follow the language of each visible question.
 1. **Report context**: Use proof points from block B, STAR stories from block F
 2. **Previous Section G**: If a draft response exists, use it as a base and refine
 3. **"I'm choosing you" tone**: Same auto-pipeline framework
