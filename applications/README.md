@@ -37,7 +37,7 @@ Expected files per application:
 ## Manual Workflow
 
 1. Add the raw URL to `../applications.md` under `Unprocessed URLs` as `- URL | yes` or `- URL | no`.
-2. Inspect the application page read-only.
+2. Inspect the URL agent-first using read-only web/page access, then run the extractor as a structured cross-check or fallback.
 3. Extract company, role, language, application requirements, questions, uploads, and constraints.
 4. Create `applications/{company-role}/` from `_template/`.
 5. Fill `job.md` with the extracted posting and form requirements.
@@ -53,6 +53,60 @@ Expected files per application:
 If a URL cannot be inspected, keep it under `Unprocessed URLs` and ask for pasted job text, screenshots, or visible questions.
 
 If the inbox item is marked `| yes`, try to extract visible application questions or form fields during read-only inspection. If questions are expected but not visible with current browser capability, create only `job.md` and `application-answers.md` in the application folder, mark both as waiting for manually pasted questions, and stop before generating CV, personal letter, evidence, or answers.
+
+## Agent-First Extraction Workflow
+
+Start with agent-first read-only inspection before creating or drafting an application packet. Use web/page access to extract the actual job posting and visible application form details, then run the extractor from the project root as a structured cross-check:
+
+```bash
+npm run extract -- --url "https://example.com/job-or-apply-url"
+```
+
+Use JSON output only when structured data is more useful:
+
+```bash
+npm run extract -- --url "https://example.com/job-or-apply-url" --json
+```
+
+The extractor is read-only. It may fetch pages, render pages, inspect frames, follow iframe/direct form URLs, and report fields. It must not type into fields, upload files, submit forms, send emails, click final application actions, update `applications.md`, or mark an application as applied.
+
+Use this bounded sequence:
+
+1. Inspect the normal job URL agent-first with read-only web/page access.
+2. Extract job facts, job text, requirements, upload fields, personal-letter policy, exact form questions, personal fields, constraints, and direct form URLs.
+3. Run `npm run extract -- --url "<url>"` as a scanner and cross-check, not as the first authority.
+4. Compare agent/web inspection against the extractor report and flag mismatches.
+5. If either method reveals a direct form URL, inspect it read-only and run `npm run extract -- --url "<direct-form-url>"` when useful.
+6. Stop after about 2-3 minutes of reasonable attempts. Ask for pasted questions/screenshots instead of continuing indefinitely.
+
+Use the report as structured inspection evidence for:
+
+- Source URL and resolved/canonical/direct form URLs.
+- Company, role, location, language, deadline when detected.
+- Job description and requirement signals.
+- Upload fields, accepted formats, required flags, and constraints.
+- Exact application questions, question type, required flag, options, and field name/id.
+- Personal data fields, kept separate from job-specific questions.
+- Extraction notes and failed methods.
+
+Agent audit checklist:
+
+- Does the reported job text describe the actual role, not a benefits/privacy/cookie/related-jobs page?
+- Do all visible form questions in rendered text appear under application questions?
+- Are consent, marketing, privacy, and future-job-offer fields separated from job-specific questions?
+- Are personal/contact fields separated from job-specific questions?
+- Are upload fields and personal-letter rules explicit?
+
+Extraction completeness checklist:
+
+- Company, role, language, location, and deadline when present.
+- Job description and requirements.
+- Upload fields and whether a personal letter is required, optional, allowed, or absent.
+- Exact application questions.
+- Personal data fields separated from job-specific questions.
+- Extraction notes showing methods tried and any failures.
+
+For `| yes` inbox items, proceed to CV/letter/answer drafting only when both the job text and visible form fields/questions/uploads are captured. If the extractor finds questions, copy the exact question text into `job.md` and `application-answers.md`. If it does not find questions, continue with bounded manual read-only inspection. If questions still are not visible, create only `job.md` and `application-answers.md`, add a paste area for manually copied questions, and stop before generating candidate-facing documents.
 
 ## Evidence Format
 

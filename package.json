@@ -5,6 +5,7 @@
   "type": "module",
   "description": "Focused job application helper for Marcus",
   "scripts": {
+    "extract": "node scripts/extract-application.mjs",
     "mock:layout": "node scripts/generate-mock-layout.mjs",
     "pdf": "node scripts/render-pdf.mjs",
     "cv": "node scripts/render-application-doc.mjs cv",

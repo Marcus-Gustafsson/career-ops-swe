@@ -6,12 +6,48 @@ Specialized job application helper. The original `career-ops` project is archive
 
 When an application URL is provided:
 
-1. Inspect the job/application page read-only.
+1. Inspect the job/application page agent-first using read-only web/page access, then run `npm run extract -- --url "<url>"` as a structured cross-check or fallback.
 2. Extract the company, role, job description, language, requirements, application questions, upload fields, and constraints.
 3. Create or update the matching row in `applications.md` under `Processed Applications`.
 4. Create an application folder under `applications/{company-role}/`.
 5. Generate `job.md`, `cv.html`, `cv.pdf`, `application-answers.md`, `evidence.md`, and `review.md`, plus `personal-letter.html` and `personal-letter.pdf` only when the posting asks for or allows a personal letter. If the inbox item is marked `| yes` and expected application questions are not visible, create only `job.md` and `application-answers.md`, mark them as waiting for manually pasted questions, and stop.
 6. Stop for manual review. Never submit an application.
+
+## Agent-First Extraction
+
+- Start with agent-first read-only inspection of the normal job URL. Use web/page access to extract job facts, job description, requirements, uploads, personal-letter policy, exact application questions, personal fields, constraints, and application/form URLs.
+- Job descriptions and application forms may live on separate URLs. Treat apply/application buttons and links as part of extraction, not as submission actions.
+- If the normal job URL contains the job description but does not expose upload fields, personal-letter policy, personal/contact fields, or exact application questions, look for application/form URLs before stopping.
+- Candidate application/form URLs include visible apply buttons/links, rendered text links, page-source `a[href]`, `iframe[src]`, `turbo-frame[src]`, `form[action]`, and obvious labels such as `Apply`, `Apply now`, `Ansök`, `Sök jobbet`, `Skicka ansökan`, or equivalent local-language text.
+- Run `npm run extract -- --url "<url>"` as a structured scanner and cross-check, not as the first authority. Use `npm run extract -- --url "<url>" --json` only when structured output is easier to compare.
+- Compare agent/web inspection against the extractor report before trusting it. Flag mismatches such as job text that describes benefits, privacy, cookies, related jobs, or another page instead of the actual role.
+- Open discovered application/form URLs read-only. Do not type, upload, submit, send, or click final submission actions. Inspect only enough to capture fields, upload requirements, personal-letter policy, exact questions, constraints, and whether login/BankID/manual input blocks further inspection.
+- If either method finds an application/form URL, inspect that URL read-only and run `npm run extract -- --url "<application-or-form-url>"` if useful.
+- The extractor is an inspection helper, not an application generator. It may fetch pages, render pages, inspect frames, and report fields, but it must not type into fields, upload files, submit forms, send emails, or mark applications as applied.
+- Preserve exact form question text in `job.md` and `application-answers.md`; do not paraphrase questions that will be answered in the real form.
+- When job description and application form live on different URLs, record both the source job URL and inspected application/form URL in `job.md`.
+- Keep the combined agent/web inspection and extractor cross-check bounded to about 2-3 minutes. Use the waiting-for-manually-pasted-questions flow only after the normal job URL and any discovered application/form URLs have been inspected or reasonably attempted within the time bound.
+- For `| yes` inbox items, proceed to CV/letter/answer drafting only when both the job text and the expected form fields/questions/uploads are captured. If questions are still missing, follow the waiting-for-manually-pasted-questions flow.
+- If `npm run extract` fails for environment or network reasons, record the failure in `job.md` or keep the URL under `Unprocessed URLs` if no reliable job facts can be inspected.
+
+### Extraction Completeness
+
+Before drafting candidate-facing material, confirm the extraction captured:
+
+- Company, role, language, location, and deadline when present.
+- Job description and requirements.
+- Upload fields and whether a personal letter is required, optional, allowed, or absent.
+- Exact application questions.
+- Personal data fields separated from job-specific questions.
+- Extraction notes showing methods tried and any failures.
+
+### Agent Audit Checklist
+
+- Does the reported job text describe the actual role, not a benefits, privacy, cookie, related-jobs, or generic company page?
+- Do all visible form questions in rendered text appear under application questions?
+- Are consent, marketing, privacy, and future-job-offer fields separated from job-specific questions?
+- Are personal/contact fields separated from job-specific questions?
+- Are upload fields and personal-letter rules explicit?
 
 ## Application Tracker Inbox
 
@@ -21,7 +57,7 @@ When an application URL is provided:
 - `| no` means only normal job extraction and drafts are needed.
 - A raw URL under `Unprocessed URLs` is not a processed tracker row yet.
 - When processing a raw URL, inspect it read-only, create the application folder, add a row under `Processed Applications`, then remove the raw URL from `Unprocessed URLs`.
-- If the item is marked `| yes`, try to extract visible application questions or form fields during read-only inspection.
+- If the item is marked `| yes`, use agent-first read-only inspection and the extractor cross-check to capture visible application questions or form fields.
 - If the item is marked `| yes` but questions are not visible with current browser capability, create the application folder with only `job.md` and `application-answers.md`; `job.md` must include the source URL, company/role if extractable, inspection notes, and a clear note that questions are expected but not visible; `application-answers.md` must include a paste area for exact form questions and no generated answers.
 - If a URL cannot be inspected, keep it under `Unprocessed URLs` and ask for pasted job text, screenshots, or visible questions.
 - New processed rows must use `[ ]` in the `Applied` column.
@@ -59,6 +95,12 @@ When an application URL is provided:
 - Do not type into fields, upload documents, submit forms, send emails, or click final application actions unless explicitly told for that specific action.
 - Even when drafting application answers, present them for copy-paste and review first, then generate the answer locally.
 - Do not mark applications as applied or check the `Applied` checkbox; this is done manually by the user when the application has been sent.
+
+## Test Policy
+
+- Do not add tests that depend on ephemeral job posts, live application pages, or real employer URLs, because those sources can change or disappear.
+- Add tests only when they are necessary and important for the project.
+- Ask before adding any tests.
 
 ## File Structure
 
