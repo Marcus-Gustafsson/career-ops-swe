@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="{{LANG}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{TITLE}}</title>
+  <style>
+    @font-face {
+      font-family: "Space Grotesk";
+      src: url("./fonts/space-grotesk-latin.woff2") format("woff2");
+      font-weight: 300 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Space Grotesk";
+      src: url("./fonts/space-grotesk-latin-ext.woff2") format("woff2");
+      font-weight: 300 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "DM Sans";
+      src: url("./fonts/dm-sans-latin.woff2") format("woff2");
+      font-weight: 100 1000;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "DM Sans";
+      src: url("./fonts/dm-sans-latin-ext.woff2") format("woff2");
+      font-weight: 100 1000;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+
+    body {
+      margin: 0;
+      background: #fff;
+      color: #1f2230;
+      font-family: "DM Sans", Arial, sans-serif;
+      font-size: 10.5px;
+      line-height: 1.42;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 210mm;
+      margin: 0 auto;
+    }
+
+    .header {
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      margin: 0 0 5px;
+      color: #181b2a;
+      font-family: "Space Grotesk", Arial, sans-serif;
+      font-size: 27px;
+      font-weight: 700;
+      line-height: 1.05;
+    }
+
+    .accent {
+      height: 2px;
+      margin-bottom: 8px;
+      border-radius: 999px;
+      background: linear-gradient(to right, hsl(187, 74%, 32%), hsl(270, 70%, 45%));
+    }
+
+    .contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 11px;
+      color: #4f5668;
+      font-size: 9.5px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    section {
+      margin: 0 0 13px;
+      break-inside: avoid;
+    }
+
+    h2 {
+      margin: 0 0 7px;
+      padding-bottom: 3px;
+      border-bottom: 1.2px solid #e3e5ea;
+      color: hsl(187, 74%, 29%);
+      font-family: "Space Grotesk", Arial, sans-serif;
+      font-size: 11.2px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      margin: 0;
+      color: hsl(270, 70%, 39%);
+      font-family: "Space Grotesk", Arial, sans-serif;
+      font-size: 11.5px;
+      font-weight: 650;
+      line-height: 1.25;
+    }
+
+    p {
+      margin: 0 0 6px;
+    }
+
+    ul {
+      margin: 4px 0 0 15px;
+      padding: 0;
+    }
+
+    li {
+      margin: 0 0 3px;
+      padding-left: 1px;
+    }
+
+    .summary {
+      color: #2e3445;
+      font-size: 10.7px;
+      line-height: 1.55;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .tag {
+      border: 1px solid hsl(187, 38%, 86%);
+      border-radius: 3px;
+      background: hsl(187, 40%, 95%);
+      color: hsl(187, 74%, 25%);
+      font-size: 9.2px;
+      font-weight: 600;
+      line-height: 1.2;
+      padding: 3px 7px;
+    }
+
+    .entry {
+      margin-bottom: 9px;
+      break-inside: avoid;
+    }
+
+    .entry-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+      margin-bottom: 2px;
+    }
+
+    .meta {
+      color: #646b7b;
+      font-size: 9.3px;
+      white-space: nowrap;
+    }
+
+    .role {
+      color: #293041;
+      font-size: 9.8px;
+      font-weight: 650;
+      margin-bottom: 2px;
+    }
+
+    .compact-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 18px;
+      margin: 0;
+      list-style-position: inside;
+    }
+
+    .footnote {
+      color: #5a6272;
+      font-size: 9.3px;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    {{BODY}}
+  </main>
+</body>
+</html>

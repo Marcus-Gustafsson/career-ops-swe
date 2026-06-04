@@ -7,6 +7,39 @@
 # Dependencies
 /node_modules/
 
+# Private career data
+/personal/
+/applications.md
+/applications/*
+!/applications/README.md
+!/applications/_template/
+!/applications/_template/**
+
+# Archived private/reference data
+/inspo/career-ops/cv.md
+/inspo/career-ops/data/applications.md
+/inspo/career-ops/data/pipeline.md
+/inspo/career-ops/data/scan-history.tsv
+/inspo/career-ops/reports/*.md
+!/inspo/career-ops/reports/.gitkeep
+/inspo/career-ops/output/*
+!/inspo/career-ops/output/.gitkeep
+/inspo/career-ops/batch/logs/*
+!/inspo/career-ops/batch/logs/.gitkeep
+/inspo/career-ops/batch/batch-state.tsv
+/inspo/career-ops/batch/batch-input.tsv
+/inspo/career-ops/batch/tracker-additions/**/*.tsv
+!/inspo/career-ops/batch/tracker-additions/.gitkeep
+/inspo/career-ops/jds/*
+!/inspo/career-ops/jds/.gitkeep
+/inspo/career-ops/writing-samples/*
+!/inspo/career-ops/writing-samples/README.md
+/inspo/career-ops/config/profile.yml
+/inspo/career-ops/portals.yml
+/inspo/career-ops/modes/_profile.md
+/inspo/career-ops/.update-dismissed
+/inspo/career-ops/.update-lock
+
 # Generated output
 /output/
 /reports/
@@ -22,5 +55,7 @@
 # OS/editor
 .DS_Store
 Thumbs.db
+*Zone.Identifier
+.~lock.*
 .idea/
 .vscode/

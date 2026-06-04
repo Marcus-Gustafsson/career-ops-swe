@@ -1,0 +1,16 @@
+{
+  "name": "career-ops-swe",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Focused job application helper for Marcus",
+  "scripts": {
+    "mock:layout": "node scripts/generate-mock-layout.mjs",
+    "pdf": "node scripts/render-pdf.mjs",
+    "cv": "node scripts/render-application-doc.mjs cv",
+    "pl": "node scripts/render-application-doc.mjs pl"
+  },
+  "dependencies": {
+    "playwright": "^1.58.1"
+  }
+}
