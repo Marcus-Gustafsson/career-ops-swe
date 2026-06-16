@@ -1,0 +1,342 @@
+# Compliant job discovery config.
+# Keep this file focused on sources that are safe to refresh automatically.
+
+target_roles:
+  - Medicinteknisk ingenjör
+  - Medicintekniker
+  - Biomedical Engineer
+  - Medical Device Engineer
+  - R&D Engineer
+  - Product Development Engineer
+  - Verification Engineer
+  - Validation Engineer
+  - Automationsingenjör medtech
+  - Automation Engineer
+  - Quality Engineer
+  - Test Engineer
+  - Platform Engineer
+  - Cloud Engineer
+  - Firmware Engineer
+  - Data Engineer
+  - Product Engineer
+  - AI Engineer
+  - C# .NET Developer
+  - Junior Software Developer
+  - Junior Software Engineer
+  - Software Developer
+  - Software Engineer
+  - Backend Developer
+  - Frontend Developer
+  - Fullstack Developer
+  - Embedded Software Engineer
+
+languages:
+  - Swedish
+  - English
+
+seniority_preference:
+  - Junior
+  - Graduate
+  - Entry Level
+  - Associate
+  - Trainee
+  - Nyexaminerad
+  - New Grad
+
+title_filter:
+  positive:
+    - medicinteknisk
+    - medicintekniker
+    - biomedical
+    - medical device
+    - medtech
+    - healthtech
+    - healthcare it
+    - e-hälsa
+    - ehealth
+    - r&d engineer
+    - product development
+    - development engineer
+    - verification engineer
+    - validation engineer
+    - quality engineer
+    - test engineer
+    - platform engineer
+    - cloud engineer
+    - firmware engineer
+    - data engineer
+    - product engineer
+    - ai engineer
+    - c# .net developer
+    - .net developer
+    - software developer
+    - software engineer
+    - systemutvecklare
+    - utvecklare
+    - backend
+    - frontend
+    - fullstack
+    - full stack
+    - embedded software
+  negative:
+    - account executive
+    - account manager
+    - sales
+    - business development
+    - commercial
+    - customer success
+    - marketing
+    - recruiter
+    - hr
+    - finance
+    - legal
+    - nurse
+    - physician
+    - doctor
+    - surgeon
+    - dentist
+    - läkare
+    - lakare
+    - sjuksköterska
+    - sjukskoterska
+    - undersköterska
+    - underskoterska
+    - psykolog
+    - kurator
+    - vårdcentral
+    - vardcentral
+    - vaccination
+    - specialistläkare
+    - specialistlakare
+    - clinical specialist
+    - key account
+    - territory manager
+    - chief
+    - director
+    - head of
+    - vp
+    - vice president
+    - engineering manager
+    - principal
+    - staff
+    - senior manager
+    - lead
+    - data scientist
+    - machine learning scientist
+    - ai researcher
+    - devops
+    - sre
+    - security engineer
+    - game
+    - blockchain
+    - crypto
+    - web3
+
+location_filter:
+  allow:
+    - Sweden
+    - Sverige
+    - Stockholm
+    - Göteborg
+    - Gothenburg
+    - Örebro
+    - Orebro
+    - Malmö
+    - Malmo
+    - Lund
+    - Uppsala
+    - Linköping
+    - Linkoping
+    - Umeå
+    - Umea
+    - Mölndal
+    - Molndal
+    - Solna
+    - Remote Sweden
+    - Remote - Sweden
+    - Remote (Sweden)
+    - Hybrid Sweden
+    - Hybrid - Sweden
+    - Hybrid (Sweden)
+  block:
+    - United States
+    - USA
+    - Canada
+    - United Kingdom
+    - UK
+    - London
+    - Germany
+    - Berlin
+    - Munich
+    - France
+    - Paris
+    - India
+    - Singapore
+    - Japan
+    - Australia
+    - Brazil
+    - APAC
+    - LATAM
+
+sources:
+  platsbanken:
+    enabled: true
+    queries:
+      - medtech software
+      - medicinteknisk ingenjör
+      - biomedical engineer
+      - software developer medtech
+      - junior software developer
+      - embedded software medical
+
+  ats:
+    enabled: true
+    tracked_companies:
+      - name: Neko Health
+        provider: ashby
+        careers_url: https://jobs.ashbyhq.com/neko-health
+        location_note: Stockholm HQ and hardware development; also London/Berlin and remote-first software teams.
+        company_note: Preventative healthcare company building non-invasive health scans with custom medical hardware, software, firmware, data, and clinical operations.
+        fit_note: Strong fit for regulated healthtech, firmware/software/data, verification, and medical-device-adjacent engineering; many roles may be senior.
+      - name: Tandem Health
+        provider: ashby
+        careers_url: https://jobs.ashbyhq.com/tandem-health
+        location_note: Stockholm HQ, mostly on-site for product and engineering roles.
+        company_note: AI healthtech company building clinician-first documentation and workflow tools for healthcare.
+        fit_note: Strong fit for software/platform/product engineering in healthcare; less classic medical device, more healthtech/SaaS.
+      - name: Viedoc
+        provider: teamtailor
+        careers_url: https://careers.viedoc.com
+        location_note: Uppsala HQ with hybrid roles.
+        company_note: Clinical-trial software platform used by life science, biotech, pharma, and medical device organizations.
+        fit_note: Good fit for regulated software, clinical research systems, QA, .NET, cloud, and health data workflows.
+      - name: Kry
+        provider: teamtailor
+        careers_url: https://career.kry.se
+        location_note: Stockholm tech office with hybrid roles.
+        company_note: Digital healthcare provider building software for patient access, clinician workflows, prescriptions, and care delivery.
+        fit_note: Good healthtech software fit; less hardware/medtech, more product/backend/platform.
+      - name: Doktor.se
+        provider: teamtailor
+        careers_url: https://jobs.doktor.se
+        location_note: Stockholm tech/product roles plus healthcare operations across Sweden.
+        company_note: Digital and physical healthcare provider with internal software for patients, employees, and healthcare actors.
+        fit_note: Good software and data fit in healthcare; many listings are clinical-care roles and should be filtered out.
+      - name: Mentice
+        provider: teamtailor
+        careers_url: https://career.mentice.com
+        location_note: Gothenburg/Sweden presence with international offices.
+        company_note: Medical simulation company building software and hardware simulation solutions for endovascular therapies.
+        fit_note: Strong medtech fit for software, QA, product, and hardware-adjacent roles; openings may be sparse.
+      - name: LINK Medical
+        provider: teamtailor
+        careers_url: https://careers.linkmedical.eu
+        location_note: Stockholm and Uppsala offices; Nordic presence.
+        company_note: CRO and regulatory services provider for biotech, pharma, medtech, IVD, software, and AI medical products.
+        fit_note: Fit for regulatory/quality/software-as-medical-device exposure; may skew toward experienced regulatory profiles.
+      - name: AMRA Medical
+        provider: teamtailor
+        careers_url: https://amramedical.teamtailor.com
+        location_note: Linköping-based digital health and medical imaging company.
+        company_note: Builds MRI-based body composition analysis and biomarkers for research, pharma, hospitals, and health applications.
+        fit_note: Strong fit for medical imaging, software, data, and regulated digital health; openings may be limited.
+      - name: Corsmed
+        provider: teamtailor
+        careers_url: https://careers.corsmed.com
+        location_note: Stockholm location; also remote roles and international sites.
+        company_note: Research- and tech-heavy medtech/software startup building MRI simulator technology to scale MRI training and healthcare capacity.
+        fit_note: Strong Stockholm medtech/software fit, especially for product development, simulation, imaging, and software roles.
+      - name: Omda
+        provider: teamtailor
+        careers_url: https://careers.omda.com
+        location_note: Solna/Stockholm site, within primary Stockholm target area.
+        company_note: Nordic healthcare software provider covering connected healthcare, medical imaging, medication management, LIMS, and health analytics.
+        fit_note: Strong healthcare software fit; likely more enterprise healthcare IT than hardware medtech.
+      - name: Medoma
+        provider: teamtailor
+        careers_url: https://career.medoma.com
+        location_note: Stockholm-based virtual ward company.
+        company_note: Builds technology and care workflows for hospital-at-home acute care, helping patients receive hospital-level care at home.
+        fit_note: Strong Stockholm healthtech software fit; less classic medical device, more care-delivery platform.
+
+  manual_company_notes:
+    enabled: true
+    companies:
+      - name: C-RAD
+        careers_url: https://c-rad.com/about-us/careers/
+        location_note: Uppsala, Sweden.
+        company_note: Medical device company focused on patient positioning and surface-guided radiation therapy.
+        fit_note: Strong fit for test, software, verification, and medical-device product lifecycle; custom careers page, not auto-refreshed yet.
+      - name: Elekta
+        careers_url: https://www.elekta.com/company/careers/jobs/
+        location_note: Stockholm-centered Swedish medtech company with global offices.
+        company_note: Builds radiation therapy, radiosurgery, oncology software, and cancer-care technology.
+        fit_note: Strong regulated software/hardware medtech fit; Workday-backed careers, provider pending.
+      - name: Getinge
+        careers_url: https://careers.getinge.com/viewalljobs/?locale=en_US
+        location_note: Gothenburg HQ and global locations.
+        company_note: Medical technology company for surgical, intensive care, sterilization, digital health, and life-saving healthcare systems.
+        fit_note: Strong embedded/software/digital-health fit; SuccessFactors-style careers, provider pending.
+      - name: Hermes Medical Solutions
+        careers_url: https://www.hermesmedical.com/careers/
+        location_note: Stockholm HQ.
+        company_note: Nuclear medicine and molecular imaging software company building Hermia for clinical diagnosis and therapy workflows.
+        fit_note: Strong software + medical imaging fit; custom careers page, not auto-refreshed yet.
+      - name: Meloq Devices
+        careers_url: https://meloqdevices.com/pages/careers
+        location_note: Stockholm HQ.
+        company_note: Swedish medtech and sportstech company building clinical-grade measurement tools such as EasyAngle, EasyForce, and EasyBase.
+        fit_note: Good Stockholm product-company fit for hardware-adjacent software, product development, QA, and measurement-device work; custom careers page, not auto-refreshed yet.
+      - name: RaySearch Laboratories
+        careers_url: https://raysearchlabs.com/career/
+        location_note: Stockholm HQ.
+        company_note: Medical technology company developing radiation therapy treatment planning and oncology software.
+        fit_note: Strong Stockholm regulated software/medical physics fit; custom careers page, not auto-refreshed yet.
+      - name: Karolinska Universitetssjukhuset / Region Stockholm
+        careers_url: https://www.karolinska.se/jobba-hos-oss/lediga-jobb/
+        location_note: Stockholm/Solna/Huddinge, within primary Stockholm target area.
+        company_note: Hospital and regional healthcare organization with medical technology systems, imaging, diagnostics, integration, system management, and clinical engineering roles.
+        fit_note: Strong public-sector medtech/healthcare IT fit, especially for medicinteknik, systems, imaging, integration, and technical system management; custom/Varbi pages, not auto-refreshed yet.
+      - name: Region Örebro län
+        careers_url: https://www.regionorebrolan.se/sv/jobb-och-utbildning/lediga-jobb/
+        location_note: Örebro, primary target city.
+        company_note: Regional healthcare organization with medical technology support, systems, procurement, maintenance, system administration, construction, and development of medical technology products and systems.
+        fit_note: Strong Örebro public-sector medtech fit; useful for IT-specialist, medicinteknisk ingenjör, systemförvaltare, and healthcare IT roles; custom pages, not auto-refreshed yet.
+      - name: ALTEN Sweden
+        careers_url: https://www.alten.se/karriar/
+        location_note: Stockholm and Örebro offices, among other Swedish sites.
+        company_note: Engineering and IT consultancy with medtech, life science, software development, test, quality assurance, embedded systems, and product development specialties.
+        fit_note: Good secondary target if product-company roles are sparse; consultancy work may provide medtech exposure but depends heavily on assignment.
+      - name: Glooko / diasend
+        careers_url: https://glooko.com/careers/
+        location_note: Sweden presence through diasend/Gothenburg heritage; global/remote roles may appear.
+        company_note: Diabetes data and connected care platform integrating glucose meters, CGMs, insulin pumps, connected insulin pens, and other diabetes/health devices.
+        fit_note: Strong diabetes software/data fit; location may not match Stockholm/Örebro but diabetes relevance is high.
+      - name: Rubin Medical
+        careers_url: https://rubinmedical.se/
+        location_note: Malmö-based Swedish/Nordic diabetes technology company.
+        company_note: Provides insulin pump systems, CGM-compatible workflows, infusion sets, and diabetes technology support, including Tandem t:slim X2 and Dexcom-related solutions.
+        fit_note: Strong diabetes device ecosystem fit; likely more distribution/support than own R&D, but relevant to diabetes technology and regulated device workflows.
+      - name: MED TRUST Sweden
+        careers_url: https://www.medtrust.se/
+        location_note: Swedish team/customer support; company page lists Sweden contact and diabetes product focus.
+        company_note: Wellion diabetes and health product provider with glucose/ketone meters, pen needles, insulin pump, rtCGM system, HbA1c diagnostics, and related products.
+        fit_note: Good diabetes product/domain fit; likely commercial/support-heavy, so review technical role availability manually.
+      - name: Diabetes Tools
+        careers_url: https://diabetestools.se/
+        location_note: Stockholm-based diabetes software company according to public company profiles.
+        company_note: Builds TriabetesClinic, CE-marked software combining apps, online accounts, and web interfaces for diabetes self-care and healthcare workflows.
+        fit_note: Very strong diabetes SaMD/software-domain fit if active hiring exists; careers/feed not confirmed, so manual review only.
+      - name: Diamyd Medical
+        careers_url: https://www.diamyd.com/careers/Default.aspx
+        location_note: Stockholm HQ and Umeå site.
+        company_note: Develops precision medicine therapies for autoimmune diabetes, including type 1 diabetes and LADA.
+        fit_note: Diabetes-focused but biotech/pharma rather than software/medtech device; include for domain interest, likely lower direct software fit.
+
+  restricted_boards:
+    enabled: false
+    manual_links:
+      - https://www.linkedin.com/jobs/search/
+      - https://se.indeed.com/
+      - https://www.glassdoor.com/Job/sweden-jobs-SRCH_IL.0,6_IN223.htm
+      - https://jobb.blocket.se/

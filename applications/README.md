@@ -32,7 +32,7 @@ Expected files per application:
 - `personal-letter.pdf` - generated personal letter PDF for submission, only when a personal letter is needed.
 - `application-answers.md` - exact form questions with copy-paste-ready answers.
 - `evidence.md` - source mapping and missing evidence.
-- `review.md` - checklist/todo review notes and reusable improvement ideas.
+- `review.md` - minimal freeform notes file for manual review observations and reusable improvement ideas.
 
 ## Manual Workflow
 
@@ -43,11 +43,11 @@ Expected files per application:
 5. Fill `job.md` with the extracted posting and form requirements.
 6. Add a row to `../applications.md` under `Processed Applications` with `Applied` set to `[ ]`.
 7. Remove the raw URL from `Unprocessed URLs` only after the processed row and application folder exist.
-8. Generate `cv.html` and, when needed, `personal-letter.html` using only `../personal/` as candidate evidence.
+8. Generate `cv.html` and, when needed, `personal-letter.html` using only `../personal/` as candidate evidence. CVs must not mention the target company in visible text or HTML `<title>` metadata; tailor by relevance, ordering, emphasis, omission, and small wording changes only, and follow existing template examples as the primary wording source.
 9. Regenerate the matching PDFs from the editable HTML files.
 10. Keep `application-answers.md` as the Markdown review/copy-paste workspace for form answers.
 11. Map every non-static candidate-facing claim in the generated HTML files and form answers to direct citations in `evidence.md`.
-12. Capture review feedback and reusable future improvements in `review.md`.
+12. Capture manual review observations and reusable future improvements under `## Notes` in `review.md`.
 13. Do not mark the tracker checkbox as applied until the application has actually been submitted manually.
 
 If a URL cannot be inspected, keep it under `Unprocessed URLs` and ask for pasted job text, screenshots, or visible questions.
@@ -136,6 +136,26 @@ Evidence rules:
 - Keep job-description facts in `Job Facts Used`; job facts may explain tailoring and vocabulary, but they are not personal evidence.
 
 Do not create per-application Markdown draft files for the CV or personal letter. The editable source files for submission documents are `cv.html` and `personal-letter.html`.
+
+## CV Formatting Rules
+
+- CV `<title>` metadata must identify Marcus and the CV/role type without the target company name.
+- Each work-experience entry should use one `<li>` description.
+- Each project entry should use one `<li>` description.
+- Use `<br>` inside that one `<li>` when a multi-sentence description needs readable line breaks.
+- Do not split one role/project description into several `<li>` items unless they are truly separate list categories.
+- Extra education support line is curated per role. For software roles, programming/coursework may fit. For medtech roles, prefer medtech-relevant support or omit the extra line if nothing fits.
+
+## Personal Letter Guidance
+
+- Keep letters concise, but do not force a rigid word target when a slightly longer letter better matches Marcus's voice and strongest evidence.
+- Letters may use a denser flowing middle paragraph when that better matches Marcus's voice.
+- Focus on strongest application-relevant evidence instead of repeating the full CV.
+- Reuse source-backed wording/themes when they already fit.
+- Prefer semi-spoken, direct, source-grounded Swedish over recruiter-polished phrasing.
+- Mild colloquial phrasing is allowed when natural, but stronger slang or dramatic expressions should usually be softened.
+- Prefer concrete/selective detail when named systems or practical examples materially strengthen fit.
+- Keep CV summaries tighter and more restrained than personal letters.
 
 ## Regenerate PDFs
 

@@ -2,6 +2,26 @@
 
 Specialized job application helper. The original `career-ops` project is archived at `inspo/career-ops/` for reference only.
 
+## Trigger Phrase Router
+
+Treat these short user phrases as workflow commands:
+
+| User phrase | Behavior |
+|---|---|
+| `new url`, `new application`, `new job application`, `next application`, `process inbox`, `process next` | Read `applications.md`, find the first real URL under `Unprocessed URLs`, then run the normal URL application workflow. |
+| `process all`, `process inbox all` | Process every real unprocessed URL in order, stopping on blockers that require manually pasted questions or other user input. |
+| `inbox`, `tracker`, `status`, `show applications` | Summarize unprocessed URLs and processed applications, with the next recommended action. |
+| `pdf <slug>`, `regenerate pdf <slug>` | Regenerate `cv.pdf` and, only if present, `personal-letter.pdf`. |
+| `pdf <html-file>` | Regenerate one specific PDF with `npm run pdf -- <html-file>`. |
+| Direct job/application URL | Process that URL immediately. If it already exists under `Unprocessed URLs`, use that row's `yes`/`no` flag. |
+| `questions pasted`, `form questions`, `continue <slug>` | Resume a waiting application folder after manually pasted form questions are supplied. |
+
+For inbox-trigger phrases, the first real unprocessed URL is the first pipe-list item under `## Unprocessed URLs` matching `- URL | yes` or `- URL | no` where the URL is not a placeholder and does not start with `<`.
+
+For direct URL input, first check whether the URL already exists under `Unprocessed URLs`; if so, preserve the row's `yes`/`no` application-question flag and remove the inbox item only after a processed tracker row and application folder exist.
+
+Do not copy the archived `apply` behavior. This project only drafts local copy-paste answers and stops for manual review.
+
 ## Core Workflow
 
 When an application URL is provided:
@@ -56,12 +76,20 @@ Before drafting candidate-facing material, confirm the extraction captured:
 - `| yes` means application form questions are expected or must be checked.
 - `| no` means only normal job extraction and drafts are needed.
 - A raw URL under `Unprocessed URLs` is not a processed tracker row yet.
+- Real inbox work items are pipe-list URL rows that do not start with `<`; placeholders and examples are not work items.
 - When processing a raw URL, inspect it read-only, create the application folder, add a row under `Processed Applications`, then remove the raw URL from `Unprocessed URLs`.
 - If the item is marked `| yes`, use agent-first read-only inspection and the extractor cross-check to capture visible application questions or form fields.
 - If the item is marked `| yes` but questions are not visible with current browser capability, create the application folder with only `job.md` and `application-answers.md`; `job.md` must include the source URL, company/role if extractable, inspection notes, and a clear note that questions are expected but not visible; `application-answers.md` must include a paste area for exact form questions and no generated answers.
 - If a URL cannot be inspected, keep it under `Unprocessed URLs` and ask for pasted job text, screenshots, or visible questions.
 - New processed rows must use `[ ]` in the `Applied` column.
 - Only the user manually changes `Applied` to `[x]` after submitting an application.
+
+### Resume Manually Pasted Questions
+
+- Use `questions pasted`, `form questions`, or `continue <slug>` when a `| yes` application was previously stopped because exact form questions were not visible.
+- Read the waiting folder's `job.md` and `application-answers.md`, preserve the exact pasted question text, then draft local copy-paste answers in the form-question language.
+- If the pasted questions unblock the full packet, generate the skipped CV, optional personal letter, evidence, a minimal `review.md` notes file, and PDFs as appropriate.
+- Stop for manual review and never type into the live form, upload files, submit, send emails, or mark the tracker row as applied.
 
 ## Source-of-Truth Rule
 
@@ -70,6 +98,17 @@ Before drafting candidate-facing material, confirm the extraction captured:
 - Do not invent employers, dates, skills, education, credentials, metrics, projects, responsibilities, or achievements.
 - If the source documents do not support a useful claim, write it as missing evidence in `evidence.md` or ask for the missing fact/information if critical for the application.
 - Job descriptions can provide employer needs and vocabulary, but not new personal facts, as all facts and claims come from the documents within `personal/`.
+- For CV generation, read `personal/cv-generation-rules.md` and use its Swedish/English CV template examples as the default wording foundation for summaries, work-experience descriptions, project descriptions, and other reusable CV sections. Follow the examples more strictly than before and make only minor edits for role relevance when the edited wording remains supported by `personal/`.
+- Never mention the application company name in a CV, including visible text and HTML `<title>` metadata. Do not write phrases such as `hos <company>`, `i rollen hos <company>`, `för <company>`, or equivalent company-specific CV wording. Use job text only for relevance, ordering, emphasis, omission, and small wording changes.
+- In CV HTML, each work-experience entry and each project entry should have one `<li>` description. If multiple sentence lines are needed, keep them inside that one `<li>` and separate readable lines with `<br>`.
+- In the education section, keep the degree and thesis/publication facts stable, but treat any extra supporting line as curated per role. For software roles, a programming/coursework line may fit. For medtech roles, prefer medtech-relevant support or omit the extra line if nothing fits well.
+- Personal letters should focus on the strongest application-relevant evidence instead of repeating all background.
+- Personal letters should sound semi-spoken, direct, and source-grounded rather than recruiter-polished.
+- Mild colloquial phrasing is allowed when natural, but stronger slang or dramatic expressions should usually be softened into recruiter-safe wording.
+- Prefer concrete/selective detail over generic summary when named systems or practical examples materially strengthen fit.
+- CV summaries should stay tighter and more restrained than personal letters.
+- A denser flowing middle paragraph is acceptable when that better matches Marcus's voice.
+- Do not force a rigid word target when a slightly longer letter better matches Marcus's natural voice and strongest evidence.
 
 ## Evidence Citation Rule
 
@@ -106,7 +145,7 @@ Before drafting candidate-facing material, confirm the extraction captured:
 
 - `personal/` contains private source-of-truth documents.
 - `applications.md` is the markdown checklist tracker.
-- `applications/{company-role}/` contains one application's extracted job notes, editable HTML documents, generated PDFs, application answers, evidence notes, and review notes.
+- `applications/{company-role}/` contains one application's extracted job notes, editable HTML documents, generated PDFs, application answers, evidence notes, and a minimal `review.md` file for manual notes.
 - `templates/` contains future CV and personal-letter templates.
 - `inspo/career-ops/` is a read-only reference snapshot.
 

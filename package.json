@@ -5,11 +5,13 @@
   "type": "module",
   "description": "Focused job application helper for Marcus",
   "scripts": {
+    "discover": "node scripts/discover-jobs.mjs",
     "extract": "node scripts/extract-application.mjs",
     "mock:layout": "node scripts/generate-mock-layout.mjs",
     "pdf": "node scripts/render-pdf.mjs",
     "cv": "node scripts/render-application-doc.mjs cv",
-    "pl": "node scripts/render-application-doc.mjs pl"
+    "pl": "node scripts/render-application-doc.mjs pl",
+    "test:discover": "node --test tests/discover-jobs.test.mjs"
   },
   "dependencies": {
     "playwright": "^1.58.1"

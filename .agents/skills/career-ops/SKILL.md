@@ -3,7 +3,7 @@ name: career-ops
 description: Focused job application helper for Marcus -- inspect job/application URLs, generate tailored application packets, and track manual submission status
 arguments: input
 user-invocable: true
-argument-hint: "[url | inbox | tracker | pdf <slug-or-html>]"
+argument-hint: "[url | new url | inbox | tracker | pdf <slug-or-html> | continue <slug>]"
 license: MIT
 ---
 
@@ -18,10 +18,13 @@ Determine intent from `$input`:
 | Input | Behavior |
 |-------|----------|
 | Empty | Show the compact menu below. |
-| Job/application URL | Process that URL into an application packet. |
-| `inbox` or `tracker` | Read `applications.md`, summarize unprocessed and processed applications, and offer the next concrete action. |
-| `pdf <slug>` | Regenerate PDFs for an application folder with `npm run cv -- <slug>` and, only when `personal-letter.html` exists, `npm run pl -- <slug>`. |
+| `new url`, `new application`, `new job application`, `next application`, `process inbox`, or `process next` | Read `applications.md`, select the first real unprocessed URL, and process it with the URL application workflow. |
+| `process all` or `process inbox all` | Process all real unprocessed URLs in order, stopping when a blocker requires manual pasted questions or other user input. |
+| Job/application URL | Process that URL into an application packet. If the URL already exists under `Unprocessed URLs`, preserve that row's `yes`/`no` application-question flag. |
+| `inbox`, `tracker`, `status`, or `show applications` | Read `applications.md`, summarize unprocessed and processed applications, and offer the next concrete action. |
+| `pdf <slug>` or `regenerate pdf <slug>` | Regenerate PDFs for an application folder with `npm run cv -- <slug>` and, only when `personal-letter.html` exists, `npm run pl -- <slug>`. |
 | `pdf <html-file>` | Regenerate a specific PDF with `npm run pdf -- <html-file>`. |
+| `questions pasted`, `form questions`, or `continue <slug>` | Resume a waiting application folder after the user has supplied exact form questions. Draft copy-paste answers locally and stop for review. |
 | Pasted job text | Extract job facts from the pasted text, then ask for the source URL or form details before generating final application materials. |
 
 Compact menu:
@@ -30,13 +33,30 @@ Compact menu:
 career-ops
 
 Use:
+  new url                               Process the first real URL in applications.md.
+  process all                           Process every real unprocessed URL in order.
   /career-ops <job-or-application-url>  Process one URL into an application packet.
-  /career-ops inbox                     Review URLs in applications.md.
-  /career-ops tracker                   Summarize processed applications.
+  inbox | tracker | status              Review URLs and processed applications.
   /career-ops pdf <slug-or-html>        Regenerate CV/personal-letter PDFs.
+  continue <slug>                       Resume after manually pasted form questions.
 
 Workflow stops at manual review. Never submit applications or mark them applied.
 ```
+
+## Inbox Trigger Rules
+
+For `new url`, `new application`, `new job application`, `next application`, `process inbox`, and `process next`:
+
+1. Read `applications.md`.
+2. In `## Unprocessed URLs`, select the first real pipe-list item matching `- URL | yes` or `- URL | no`.
+3. Ignore instructional examples, placeholders, and any item where the URL starts with `<`.
+4. Preserve the selected row's `yes`/`no` application-question flag throughout extraction and drafting.
+5. Run the URL application workflow on the selected URL.
+6. Remove the selected inbox item only after the processed tracker row and application folder exist.
+
+For `process all` or `process inbox all`, repeat the same process for each real unprocessed URL in order. Stop the batch when a URL cannot be inspected reliably, when expected `| yes` questions are not visible and must be manually pasted, or when any other blocker needs user input.
+
+When a direct URL is provided, first check whether the same URL already exists under `Unprocessed URLs`. If it does, use that row's `yes`/`no` flag and remove that inbox item only after the processed tracker row and application folder exist.
 
 ## URL Application Workflow
 
@@ -70,12 +90,24 @@ When a job/application URL is provided:
 - Use only `yes` and `no`.
 - `yes` means application form questions are expected or must be checked.
 - `no` means normal job extraction and drafts are enough.
+- Real inbox URLs are pipe-list items under `## Unprocessed URLs` that do not start with `<`; placeholders and examples are instructions, not work items.
 - Remove an inbox item only after the processed tracker row and application folder exist.
 - New processed rows must use `[ ]` in the `Applied` column. Only the user manually changes `[ ]` to `[x]` after submitting.
 
 For `| yes` inbox items, proceed to CV/letter/answer drafting only when both job text and expected form fields/questions/uploads are captured. If questions are not visible, create only `job.md` and `application-answers.md`; mark both as waiting for manually pasted questions, include a paste area for exact questions, and stop.
 
 If a URL cannot be inspected reliably, keep it under `Unprocessed URLs` and ask for pasted job text, screenshots, or visible questions.
+
+## Resume Questions Workflow
+
+Use this for `questions pasted`, `form questions`, or `continue <slug>` after a previous `| yes` application stopped waiting for manual form questions.
+
+1. Identify the application folder from `<slug>` or the most recent waiting folder if the user has clearly pasted questions for it.
+2. Read that folder's `job.md` and `application-answers.md`.
+3. Preserve the exact pasted question text in both files.
+4. Generate only local draft answers for copy-paste review, using `personal/` as the source of personal facts and matching the form-question language.
+5. If enough information is now available, complete the normal packet files that were intentionally skipped while waiting, including CV, optional personal letter, evidence, a minimal `review.md` notes file, and PDFs as appropriate.
+6. Stop for manual review. Do not type answers into the form, upload documents, submit, send emails, or mark the application as applied.
 
 ## Candidate-Facing Material
 
@@ -85,6 +117,17 @@ Use `personal/` as the only approved source for personal-specific facts.
 - Do not invent employers, dates, skills, education, credentials, metrics, projects, responsibilities, or achievements.
 - Job descriptions can provide employer needs and vocabulary, but not new personal facts.
 - If source documents do not support a useful claim, record missing evidence in `evidence.md` or ask for the missing fact if critical.
+- For CV generation, read `personal/cv-generation-rules.md` and use its Swedish/English CV template examples as the default wording foundation for summaries, work-experience descriptions, project descriptions, and other reusable CV sections. Follow the examples more strictly than before and make only minor edits for role relevance when the edited wording remains supported by `personal/`.
+- Never mention the application company name in a CV, including visible text and HTML `<title>` metadata. Do not write phrases such as `hos <company>`, `i rollen hos <company>`, `för <company>`, or equivalent company-specific CV wording. Use job text only for relevance, ordering, emphasis, omission, and small wording changes.
+- In CV HTML, each work-experience entry and each project entry should have one `<li>` description. If multiple sentence lines are needed, keep them inside that one `<li>` and separate readable lines with `<br>`.
+- In the education section, keep the degree and thesis/publication facts stable, but treat any extra supporting line as curated per role. For software roles, a programming/coursework line may fit. For medtech roles, prefer medtech-relevant support or omit the extra line if nothing fits well.
+- Personal letters should focus on the strongest application-relevant evidence instead of repeating all background.
+- Personal letters should sound semi-spoken, direct, and source-grounded rather than recruiter-polished.
+- Mild colloquial phrasing is allowed when natural, but stronger slang or dramatic expressions should usually be softened into recruiter-safe wording.
+- Prefer concrete/selective detail over generic summary when named systems or practical examples materially strengthen fit.
+- CV summaries should stay tighter and more restrained than personal letters.
+- A denser flowing middle paragraph is acceptable when that better matches Marcus's voice.
+- Do not force a rigid word target when a slightly longer letter better matches Marcus's natural voice and strongest evidence.
 
 Match application language:
 
